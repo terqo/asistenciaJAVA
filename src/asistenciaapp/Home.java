@@ -1,11 +1,20 @@
 package asistenciaapp;
 
 import asistenciaapp.conexion.dbAG;
-
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
-import javax.swing.JOptionPane;
-
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
 /**
  *
  * @author oscar
@@ -120,6 +129,58 @@ public class Home extends javax.swing.JFrame {
         System.out.println(e);
     }
 }
+    public void exportarExcel(JTable t) throws IOException {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de excel", "xls");
+        chooser.setFileFilter(filter);
+        chooser.setDialogTitle("Guardar archivo");
+        chooser.setAcceptAllFileFilterUsed(false);
+        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            String ruta = chooser.getSelectedFile().toString().concat(".xls");
+            try {
+                File archivoXLS = new File(ruta);
+                if (archivoXLS.exists()) {
+                    archivoXLS.delete();
+                }
+                archivoXLS.createNewFile();
+                Workbook libro = new HSSFWorkbook();
+                FileOutputStream archivo = new FileOutputStream(archivoXLS);
+                Sheet hoja = libro.createSheet("Mi hoja de trabajo 1");
+                hoja.setDisplayGridlines(false);
+                for (int f = 0; f < t.getRowCount(); f++) {
+                    Row fila = hoja.createRow(f);
+                    for (int c = 0; c < t.getColumnCount(); c++) {
+                        Cell celda = fila.createCell(c);
+                        if (f == 0) {
+                            celda.setCellValue(t.getColumnName(c));
+                        }
+                    }
+                }
+                int filaInicio = 1;
+                for (int f = 0; f < t.getRowCount(); f++) {
+                    Row fila = hoja.createRow(filaInicio);
+                    filaInicio++;
+                    for (int c = 0; c < t.getColumnCount(); c++) {
+                        Cell celda = fila.createCell(c);
+                        if (t.getValueAt(f, c) instanceof Double) {
+                            celda.setCellValue(Double.parseDouble(t.getValueAt(f, c).toString()));
+                        } else if (t.getValueAt(f, c) instanceof Float) {
+                            celda.setCellValue(Float.parseFloat((String) t.getValueAt(f, c)));
+                        } else {
+                            celda.setCellValue(String.valueOf(t.getValueAt(f, c)));
+                        }
+                    }
+                }
+                libro.write(archivo);
+                archivo.close();
+                Desktop.getDesktop().open(archivoXLS);
+            } catch (IOException | NumberFormatException e) {
+                throw e;
+            }
+        }
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -324,7 +385,16 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuReportAsistenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportAsistenActionPerformed
-        // TODO add your handling code here:
+        tableDatos.setVisible(true);
+        mostrarDatosTabla("empleado");
+       
+        try {
+            exportarExcel(tableDatos);
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex);
+        }
+
+        
     }//GEN-LAST:event_menuReportAsistenActionPerformed
 
     private void menuUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUpdateUserActionPerformed
