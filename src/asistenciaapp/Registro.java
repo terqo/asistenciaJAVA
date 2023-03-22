@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
  */
 public class Registro extends javax.swing.JFrame {
    
-    PreparedStatement ps;
+    public PreparedStatement ps;
+    
     
     private void limpiarCajas(){
         txtApellido.setText(null);
@@ -24,13 +25,14 @@ public class Registro extends javax.swing.JFrame {
     
     public Registro() {
         initComponents();
+        auto_cod();
     }
-
+    
+        
     public void registrarDatos(){
     try{
         dbAG con = new dbAG();
         Connection dbAG = con.Conectar();
-
         ps= dbAG.prepareStatement("INSERT INTO empleado (id,nombre,apellido,sexo,cargo,area) VALUES (?,?,?,?,?,?)");
         ps.setString(1, txtID.getText());
         ps.setString(2, txtNombre.getText());
@@ -48,10 +50,54 @@ public class Registro extends javax.swing.JFrame {
         }
         dbAG.close();
     }catch(SQLException e){
+        JOptionPane.showMessageDialog(null, "Error al guardar el empleado. Error: " + e);
         System.out.println(e);
     }
 }
-
+    public void modificarDatos(){
+        try{
+        dbAG con = new dbAG();
+        Connection dbAG = con.Conectar();
+        ps= dbAG.prepareStatement("INSERT INTO empleado (id,nombre,apellido,sexo,cargo,area) VALUES (?,?,?,?,?,?)");
+        ps.setString(1, txtID.getText());
+        ps.setString(2, txtNombre.getText());
+        ps.setString(3, txtApellido.getText());
+        ps.setString(4, sexoCombo.getSelectedItem().toString());
+        ps.setString(5, txtCargo.getText());
+        ps.setString(6, txtArea.getText());
+        int res = ps.executeUpdate();
+        if(res >0){
+            JOptionPane.showMessageDialog(null,"Empleado Guardado!");
+            limpiarCajas();
+        } else{
+            JOptionPane.showMessageDialog(null, "Error al guardar el empleado ");
+            limpiarCajas();
+        }
+        dbAG.close();
+    }catch(SQLException e){
+        JOptionPane.showMessageDialog(null, "Error al guardar el empleado. Error: " + e);
+        System.out.println(e);
+    }
+    }
+        int codi;
+    String autcod;
+    public void auto_cod() {
+        try {
+            dbAG con = new dbAG();
+            Connection dbAG = con.Conectar();
+            System.out.println("todo bien ");
+            con.rs = con.stm.executeQuery("SELECT top(1) ID FROM empleado WHERE ID<>'E000' ORDER BY ID DESC");
+            System.out.println("todo bien");
+            while (con.rs.next()) {
+                autcod = con.rs.getString("ID");
+                codi = 1 + Integer.parseInt(autcod.substring(1, 4));
+                txtID.setText("E" + String.format("%03d", codi));
+            }
+        } catch (Exception e) {
+             System.out.println(e);
+        }
+}
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -126,6 +172,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel2.setText("Apellidos:");
 
         jLabel7.setText("ID:");
+
+        txtID.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,7 +264,9 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        
         registrarDatos();
+       
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
