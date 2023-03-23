@@ -2,6 +2,7 @@ package asistenciaapp;
 
 import asistenciaapp.conexion.dbAG;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 
@@ -13,7 +14,11 @@ public class Registro extends javax.swing.JFrame {
    
     public PreparedStatement ps;
     
-    
+    //icono form
+    public void iconImage(){
+        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/ag.png");
+        this.setIconImage(icono.getImage());
+    }
     private void limpiarCajas(){
         txtApellido.setText(null);
         txtNombre.setText(null);
@@ -25,7 +30,7 @@ public class Registro extends javax.swing.JFrame {
     
     public Registro() {
         initComponents();
-        auto_cod();
+        iconImage();
     }
     
         
@@ -35,11 +40,11 @@ public class Registro extends javax.swing.JFrame {
         Connection dbAG = con.Conectar();
         ps= dbAG.prepareStatement("INSERT INTO empleado (id,nombre,apellido,sexo,cargo,area) VALUES (?,?,?,?,?,?)");
         ps.setString(1, txtID.getText());
-        ps.setString(2, txtNombre.getText());
-        ps.setString(3, txtApellido.getText());
+        ps.setString(2, txtNombre.getText().toUpperCase());
+        ps.setString(3, txtApellido.getText().toUpperCase());
         ps.setString(4, sexoCombo.getSelectedItem().toString());
-        ps.setString(5, txtCargo.getText());
-        ps.setString(6, txtArea.getText());
+        ps.setString(5, txtCargo.getText().toUpperCase());
+        ps.setString(6, txtArea.getText().toUpperCase());
         int res = ps.executeUpdate();
         if(res >0){
             JOptionPane.showMessageDialog(null,"Empleado Guardado!");
@@ -54,39 +59,17 @@ public class Registro extends javax.swing.JFrame {
         System.out.println(e);
     }
 }
-    public void modificarDatos(){
-        try{
-        dbAG con = new dbAG();
-        Connection dbAG = con.Conectar();
-        ps= dbAG.prepareStatement("INSERT INTO empleado (id,nombre,apellido,sexo,cargo,area) VALUES (?,?,?,?,?,?)");
-        ps.setString(1, txtID.getText());
-        ps.setString(2, txtNombre.getText());
-        ps.setString(3, txtApellido.getText());
-        ps.setString(4, sexoCombo.getSelectedItem().toString());
-        ps.setString(5, txtCargo.getText());
-        ps.setString(6, txtArea.getText());
-        int res = ps.executeUpdate();
-        if(res >0){
-            JOptionPane.showMessageDialog(null,"Empleado Guardado!");
-            limpiarCajas();
-        } else{
-            JOptionPane.showMessageDialog(null, "Error al guardar el empleado ");
-            limpiarCajas();
-        }
-        dbAG.close();
-    }catch(SQLException e){
-        JOptionPane.showMessageDialog(null, "Error al guardar el empleado. Error: " + e);
-        System.out.println(e);
-    }
-    }
+
         int codi;
     String autcod;
     public void auto_cod() {
         try {
             dbAG con = new dbAG();
             Connection dbAG = con.Conectar();
+            Statement stm = dbAG.createStatement();
             System.out.println("todo bien ");
-            con.rs = con.stm.executeQuery("SELECT top(1) ID FROM empleado WHERE ID<>'E000' ORDER BY ID DESC");
+            String sql = "SELECT ID FROM empleado WHERE ID<>'E000' ORDER BY id";
+            ResultSet rs = con.stm.executeQuery(sql);
             System.out.println("todo bien");
             while (con.rs.next()) {
                 autcod = con.rs.getString("ID");
@@ -121,6 +104,8 @@ public class Registro extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("RegistroAG");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -173,8 +158,6 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel7.setText("ID:");
 
-        txtID.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,52 +165,49 @@ public class Registro extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegister)
-                .addGap(34, 34, 34)
-                .addComponent(btnCancelar)
-                .addGap(42, 42, 42))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnRegister)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnCancelar)
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(sexoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel6))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                                        .addComponent(txtArea)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sexoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,7 +227,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister)
                     .addComponent(btnCancelar))
