@@ -1,0 +1,371 @@
+<!--
+  __  __        _____                   __          ___           _                   ___ ____              _   
+ |  \/  |      / ____|                  \ \        / (_)         | |                 / _ \___ \            | |  
+ | \  / |_   _| (___  _ __   __ _  ___ __\ \  /\  / / _ _ __   __| | _____      ____| (_) |__) | _ __   ___| |_ 
+ | |\/| | | | |\___ \| '_ \ / _` |/ __/ _ \ \/  \/ / | | '_ \ / _` |/ _ \ \ /\ / / __\__, |__ < | '_ \ / _ \ __|
+ | |  | | |_| |____) | |_) | (_| | (_|  __/\  /\  /  | | | | | (_| | (_) \ V  V /\__ \ / /___) || | | |  __/ |_ 
+ |_|  |_|\__, |_____/| .__/ \__,_|\___\___(_)/  \/   |_|_| |_|\__,_|\___/ \_/\_/ |___//_/|____(_)_| |_|\___|\__|
+          __/ |      | |                                                                                        
+         |___/       |_|  
+
+ A place for fwiends! 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MYSPACE</title>
+	<meta name="description" content="A PLACE FOR FWIENDS" />
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<meta property="og:og:title" content="MYSPACE"/>
+	<meta property="og:determiner" content="MY"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:description" content="A PLACE FOR FWIENDS"/>
+	<meta property="og:image" content="https://myspace.windows93.net/u/1/avatar.jpg">
+	<meta property="og:url" content="https://myspace.windows93.net/?id=5747">
+	<meta property="og:site_name" content="MYSPACE.WINDOWS93.NET"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+	<div id="container">	<script>
+		function timeConverter(t) {     
+		    //var a = new Date(t * 1000);
+		    var a = new Date(parseInt(t));
+		    var today = new Date();
+		    var yesterday = new Date(Date.now() - 86400000);
+		    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+		    var year = a.getFullYear();
+		    var month = months[a.getMonth()];
+		    var date = a.getDate();
+		    var hour = a.getHours();
+		    if (hour<10) {hour='0'+hour};
+		    var min = a.getMinutes();
+		    if (min<10) {min='0'+min};
+		    if (a.setHours(0,0,0,0) == today.setHours(0,0,0,0))
+		        return 'Today, ' + hour + ':' + min;
+		    else if (a.setHours(0,0,0,0) == yesterday.setHours(0,0,0,0))
+		        return 'Yesterday, ' + hour + ':' + min;
+		    else if (year == today.getFullYear())
+		        return date + ' ' + month + ', ' + hour + ':' + min;
+		    else
+		        return date + ' ' + month + ' ' + year + ', ' + hour + ':' + min;
+		}
+		function addStyleString(str) {
+		    var node = document.createElement('style');
+		    node.innerHTML = str;
+		    document.body.appendChild(node);
+		}	
+	</script>
+		<style>html{
+cursor: url(http://cur.cursors-4u.net/symbols/sym-1/sym57.cur), auto !important;
+}
+body{
+font-family:monospace;
+background-image: url(https://media.giphy.com/media/l41lZaRlws60dGyac/giphy.gif);
+background-size:cover;
+font-size: 16px;
+
+color:black;
+}
+
+a{
+color:white;
+}
+a:hover{
+color:#7CFC00;
+}
+.logo b span {
+display: none;
+}
+.logo b:before {
+content: "My5p4(3";
+font-size:18px;
+}
+div#header, div#hSub{
+text-align: center;
+background-color:#004e98;
+border:2px solid #004e98;
+}
+div#hSub{
+border-bottom:0px solid white;
+border:none;
+}
+.uName{
+font-family: monospace ;
+color:white;
+}
+.uName:after {
+content:"✔️";
+}
+.uName{
+animation: text-shadow 1.5s ease-in-out infinite;
+font-weight: 900;
+line-height: 1;
+}
+.uName:hover {
+    animation-play-state: paused;
+}
+.rightHead, .boxHead{
+background-color:#004e98;
+}
+.rightHead{
+color:white;
+}
+.boxButton{
+color:white;
+font-size:14px;
+}
+.box.url b{
+font-size:0px;
+}
+.box.url b:after{
+content:"My5p4(3 S0c1@L";
+font-size: 20px;
+}
+.box.url a{
+font-size:0px;
+}
+.box.url a::before{
+content:"https://isTheSamePage.com";
+font-size:18px;
+color: #ccffcc;
+}
+.boxInfo.box,.box.url{
+background-image: url(https://media.giphy.com/media/Fd5Za70axpNjq/giphy.gif);
+color:white;
+text-align:center;
+border-radius: 6px;
+box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+}
+.songName{
+color:white;
+border-bottom:5px solid #004e98;
+padding-bottom: 3px;
+}
+.player{
+background-color: transparent;
+background-image: url(https://web.archive.org/web/20020112070330/http://br.geocities.com:80/cruelskaterock/fire.gif);
+background-repeat: repeat-x; 
+background-position: center bottom;
+height: 95px;
+border: 2px solid #1f1d1d;
+border-bottom:0px solid black;
+border-radius: 6px;
+box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+}
+.box.blurbs,.extended.box{
+background-image: url(https://media.giphy.com/media/Fd5Za70axpNjq/giphy.gif);
+text-align: center;
+color:white;
+border: 2px solid #1f1d1d;
+border-radius: 6px;
+box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+}
+.box.comments,.box.fwiends{
+background-image: url(https://media.giphy.com/media/Fd5Za70axpNjq/giphy.gif);
+background-size:cover;
+color:white;
+border: 2px solid #1f1d1d;
+border-radius: 6px;
+box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+}
+.tableLeft{
+background-color:#004e98;
+}
+.tableRight{
+background:#004e98;
+color:white;
+border:1px solid black;
+}
+.box.fwiends{
+margin-bottom:20px;
+}
+.fwiendFace{
+box-shadow: 0 0 0 black;
+  transition: all 0.2s;
+}
+.fwiendFace:hover{
+box-shadow: 0.4rem 0.4rem 0 black;
+  transform: translate(-0.4rem, -0.4rem);
+}
+.shortRight{
+color:white;
+}
+#country:after{
+content:", Wuhan (Zero Zone)";
+}
+ 
+#about img{
+border-radius: 20px;
+margin: 7px auto;
+width:50%;
+}
+
+@keyframes text-shadow {
+    0% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #0c2ffb, 
+            0 0 0 #2cfcfd, 
+            0 0 0 #fb203b, 
+            0 0 0 #2cfcfd;
+    }
+
+    20% {  
+        transform: translateY(-1em);
+        text-shadow: 
+            0 0.125em 0 #0c2ffb, 
+            0 0.25em 0 #2cfcfd, 
+            0 -0.125em 0 #fb203b, 
+            0 -0.25em 0 #2cfcfd;
+    }
+
+    40% {  
+        transform: translateY(0.5em);
+        text-shadow: 
+            0 -0.0625em 0 #0c2ffb, 
+            0 -0.125em 0 #2cfcfd, 
+            0 0.0625em 0 #fb203b, 
+            0 0.125em 0 #2cfcfd;
+    }
+    
+   60% {
+        transform: translateY(-0.25em);
+        text-shadow: 
+            0 0.03125em 0 #0c2ffb, 
+            0 0.0625em 0 #2cfcfd, 
+            0 -0.03125em 0 #fb203b, 
+            0 -0.0625em 0 #2cfcfd;
+    }
+
+    80% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #0c2ffb, 
+            0 0 0 #2cfcfd, 
+            0 0 0 #fb203b, 
+            0 0 0 #2cfcfd;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+}
+</style>
+	<style>
+		#header{all: unset;font-family: Arial;font-size: 15px;background: #003399;color: #fff;position: fixed;width: calc( 100% - 15px );height: 22px;padding: 5px;left: 0px;top: 0px;margin-bottom: 40px;border-bottom: 1px solid black;padding-left: 10px;padding-top: 6px;overflow: hidden;z-index: 300;}
+		#hSub { all: unset; font-family: Arial;font-size: 15px;background: #6699cc;font-size: small;margin: 0px;padding: 5px; padding-top: 5px; padding-left: 5px;padding-left: 10px;padding-top: 4px;position: fixed;left: 0;top: 34px;width: calc(100% - 15px );color: #000;height: 15px;z-index: 300;}
+		@media only screen and (max-width:768px){#header{height:51px}#hSub{top:63px}#hUp{float:left;left:0;font-size:small;position:fixed;top:35px}.sep{display:none}.topLeft{margin-top:30px}}
+	</style>
+	<div id="header">
+	<a class="logo" href="/?id=1" style=""><b><span style="padding-top: 2px; position: absolute;">myspace.windows93.net</span></b></a>
+	<span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="signup.php">SignUp</a><a href="login.php">Login</a></span>	</div>
+	<div id="hSub">
+		<a href="/?id=1">Home</a>  | <a href="/list.php">All <span class="sep">Fwiends</span></a> | <a href="/random.php">Rand<span class="sep">om</span></a> | <a href="/online.php">Online</a> | <a href="/music.php">Music</a>   <span class="sep">| <a href="/blog.php">Blog</a> </span> | <a href="/search.php">Search</a>
+	</div>	<div class="topLeft">
+		<div><h2 class="uName" id="name">oscar@blue</h2></div>
+		<table class="short">
+			<tr>	
+				<td>
+					<img src="u/5747/avatar.jpg?v=1628731599" class="avatar" id="avatar">	
+						
+				</td>
+				<td class="shortRight">
+					<div>"<span id="credo">vat0s lok0s p0r s1empr3</span>"</div><br>
+					<div id="gender">Bot</div>
+					<div><span id="age">69</span> years old</div>
+					<div id="country">China</div>
+					<div id="online" style="display:none;margin-top:10px;"><img src="/img/online.gif"></div>
+					<div style="font-size:small;margin-top:10px;">Last Login:<br><span id="lastLogin">1623364178000</span></div>
+				</td>
+			</tr>
+		</table>
+		<div class="boxInfo box">
+			<div class="boxHead"><b>Contacting <span class="uName">oscar@blue</span></b></div>
+			<a href="send.php?id=5747"><div class="boxButton" id="sMsg">Send Message</div></a>
+			<a href="report.php?id=5747"><div class="boxButton" id="report">Report</div></a>
+			<a href="invitation.php?id=5747"><div class="boxButton" id="add">Add to fwiends</div></a>
+			<a href="blokc.php?id=5747"><div class="boxButton" id="block">Block</div></a>
+		</div>
+		<div class="url box">
+			<div><b>MySpace URL:</b></div>
+			<div><a style='color:#000;text-decoration:none;' href='https://myspace.windows93.net/?id=5747'>https://myspace.windows93.net/?id=5747</a></div>
+		</div>
+		<div class="player box"><div class="songName"><b>Song:</b> <span class="songTitle">Caliente
+</span><a href="https://myspace.windows93.net/u/5747/audio.mp3?v=1628731599" download="Caliente.mp3"><img style="height: 15px; float: right; padding-right: 2px;" src="https://myspace.windows93.net/img/download.svg"></a></div><audio controls autoplay src="u/5747/audio.mp3?v=1628731599" controlsList="nodownload"></audio></div>	
+	</div>
+	<div class="topRight">
+		<div class="extended box"><h3><span class="uName">oscar@blue</span> is in your extended network</h3></div>
+				<div class="box blurbs">
+		<div class='blogs'><div><b>oscar@blue's Latest Blog Entry</b></div><div>Socials? [<a href='blog.php?id=5747&b=2'>view more</a>]</div><div>How it feels been [<a href='blog.php?id=5747&b=1'>view more</a>]</div></div>			<div class="rightHead"><b><span class="uName">oscar@blue</span>'s blurbs</b></div>
+			<h4>About me:</h4>
+			<div id="about"><p><a href="https://i.imgur.com/U7rl78H.gif">https://i.imgur.com/U7rl78H.gif</a>  <a href="http://clipart-library.com/img1/1211112.gif">http://clipart-library.com/img1/1211112.gif</a><br />
+Hola, trabajo en un oxxo y soy cajero, tengo una banda de rock llamada <strong>the system is down</strong>.</p>
+<p><a href="https://media.giphy.com/media/xXvIkTu08XQLC/giphy.gif">https://media.giphy.com/media/xXvIkTu08XQLC/giphy.gif</a></p>
+<p>i <del>have</del> had a web Page <del>!!</del> :(((<br />
+<strong>Website</strong><br />
+<a href="https://visualsucios.com">WWW.VisualSucios.com</a></p>
+<p><strong>follow me on Twitter :))))!</strong><br />
+<a href="https://twitter.com/flamnte">Twitta</a><br />
+<a href="https://web.archive.org/web/20020112070330/http://br.geocities.com:80/cruelskaterock/fire.gif">https://web.archive.org/web/20020112070330/http://br.geocities.com:80/cruelskaterock/fire.gif</a><br />
+or<br />
+<strong>follow me on Insta :))))!</strong><br />
+<a href="https://www.instagram.com/keepitdopecop/">Instagr4m</a><br />
+<a href="https://web.archive.org/web/20020112070330/http://br.geocities.com:80/cruelskaterock/fire.gif">https://web.archive.org/web/20020112070330/http://br.geocities.com:80/cruelskaterock/fire.gif</a></p></div>
+			<h4>Who I'd like to meet:</h4>
+			<div id="who">
+				<p><del>h</del><br />
+fwiends!</p>
+<p>. .<br />
+v</p>			</div>	
+		</div>
+		<div class="box fwiends">
+			<div class="rightHead"><b><span class="uName">oscar@blue</span>'s Fwiends Space</b></div>
+			<div class="fwiendCounter"><b><span class="uName">oscar@blue</span> has <span class="fwiendCount">159</span> fwiends.</b></div>	
+			<div id="top">
+			<a href="https://myspace.windows93.net/?id=1"><div class="fwiendFace"><b>Tom</b><img src="u/1/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=517"><div class="fwiendFace"><b>FleaMan103</b><img src="u/517/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=5698"><div class="fwiendFace"><b>Car Made of Glass</b><img src="u/5698/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=5201"><div class="fwiendFace"><b>babypastels</b><img src="u/5201/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=3532"><div class="fwiendFace"><b>Jaden Desmond</b><img src="u/3532/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=2025"><div class="fwiendFace"><b>Marsie uwu</b><img src="u/2025/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=5761"><div class="fwiendFace"><b>Coca cola cherry</b><img src="u/5761/avatar.jpg"></div></a><a href="https://myspace.windows93.net/?id=3049"><div class="fwiendFace"><b>Ark63</b><img src="u/3049/avatar.jpg"></div></a>			</div>
+			<div id="viewFriends"><b>View <a href="all.php?id=5747">All</a> <span class="uName">oscar@blue</span>'s Fwiends</b></div>
+		</div>
+		<div class="box comments">		
+			<div style='margin-bottom:20px;'>Please <a href='login.php'>login</a> to leave a comment. </div><div class="boxHead"><b>Comments</b></div>	
+			<table id="userWall">
+				<tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=40811"><div><b>EdensLittleBean</b></div><img src="https://myspace.windows93.net/u/40811/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1619528759000 </b></div><div><p><a href="https://64.media.tumblr.com/ca8364c44ca36f06dcb5c9c734287bf2/71aa90e126a3dcbc-8e/s500x750/8aa90a6f939fb14feae54a4b2a9b188fdc86c03f.jpg">https://64.media.tumblr.com/ca8364c44ca36f06dcb5c9c734287bf2/71aa90e126a3dcbc-8e/s500x750/8aa90a6f939fb14feae54a4b2a9b188fdc86c03f.jpg</a><br />
+Thanks for the add!! I really like your page! &lt;3</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=71824"><div><b>Master Chief</b></div><img src="https://myspace.windows93.net/u/71824/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1617358642000 </b></div><div><p>Great theme!<br />
+<a href="https://cdn.discordapp.com/attachments/112711718978772992/826051823835414529/unknown.png">https://cdn.discordapp.com/attachments/112711718978772992/826051823835414529/unknown.png</a></p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=61086"><div><b>anthorix 2.0</b></div><img src="https://myspace.windows93.net/u/61086/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1616558132000 </b></div><div><p>YOUR PAGE IS SO COOL OMG &lt;333</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=43585"><div><b>jeevil</b></div><img src="https://myspace.windows93.net/u/43585/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1614133651000 </b></div><div><p>COOL PAGE tis groovy</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=48572"><div><b>girlsgirlsgirls</b></div><img src="https://myspace.windows93.net/u/48572/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1613123577000 </b></div><div><p>ur page is cool asf :)</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=13910"><div><b>Shiba Blopotter</b></div><img src="https://myspace.windows93.net/u/13910/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1609695568000 </b></div><div><p>Actually, okay, sure. ...said Constantine, moving the capital way over here to be closer to his- Main rival!</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=1496"><div><b>llilywebskateboarder</b></div><img src="https://myspace.windows93.net/u/1496/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1589903245000 </b></div><div><p>Love all the volors!!!!</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=6769"><div><b>PolandNumber1</b></div><img src="https://myspace.windows93.net/u/6769/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1589308270000 </b></div><div><p>toilet <a href="https://firey.darkok.xyz/img/toilet.gif">https://firey.darkok.xyz/img/toilet.gif</a></p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=3947"><div><b>yunggook</b></div><img src="https://myspace.windows93.net/u/3947/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1588645688000 </b></div><div><p>yo</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=5423"><div><b>ruzz</b></div><img src="https://myspace.windows93.net/u/5423/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1587851886000 </b></div><div><p>jajja 1n ispano ,vonito perfil nose</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=6150"><div><b>fvckopia</b></div><img src="https://myspace.windows93.net/u/6150/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1587414525000 </b></div><div><p>Thanks for the add! here's some cake &lt;3  <a href="https://image2.cqcb.com/d/file/county/xinshishang/zixun/2020-01-02/4d26ec3bb3796047ca55feff22de8466.jpg">https://image2.cqcb.com/d/file/county/xinshishang/zixun/2020-01-02/4d26ec3bb3796047ca55feff22de8466.jpg</a></p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=4968"><div><b>sad</b></div><img src="https://myspace.windows93.net/u/4968/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1587184466000 </b></div><div><p>你妈买菜超级加倍😉</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=6108"><div><b>mike9819</b></div><img src="https://myspace.windows93.net/u/6108/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1587092608000 </b></div><div><p>Heeeeey Oscar! Todo bien? :D Saludos desde chile bro! y gracias por agregar jeje!</p>
+<p>la página está genial y qué decir de la música men :) le di un vistazo a tu página visual sucios y quedé sorprendido jajaja</p>
+<p>Algún link para escuchar a tu banda?</p>
+<p>Cuídese del COVID y aguante latinoamérica unida carajo!</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=6110"><div><b>pizzatime420</b></div><img src="https://myspace.windows93.net/u/6110/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1587053621000 </b></div><div><p>very cool profile</p>
+<p>do you like pizza</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=5742"><div><b>miłość</b></div><img src="https://myspace.windows93.net/u/5742/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1586900429000 </b></div><div><p>love ur bg, love electroma</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=27"><div><b>firey</b></div><img src="https://myspace.windows93.net/u/27/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1586887257000 </b></div><div><p>very nice css</p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=5700"><div><b>windows xp</b></div><img src="https://myspace.windows93.net/u/5700/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1586812299000 </b></div><div><p><a href="https://i.ibb.co/Gt9PFWW/418-C8826-D6-B5-4-A51-A2-F0-50-A1454-E5-FCA.png">https://i.ibb.co/Gt9PFWW/418-C8826-D6-B5-4-A51-A2-F0-50-A1454-E5-FCA.png</a></p></div></td></tr><tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=1"><div><b>Tom</b></div><img src="https://myspace.windows93.net/u/1/avatar.jpg"></a></td><td class="tableRight"><div><b class="date">1586472803000 </b></div><div><p>Thanks 4 the add!</p></div></td></tr>			</table>
+			<div style="font-size:small;text-align:right;">(18/100)</div>		</div>
+	</div>
+	<div id="imgPreview"><img src=""></div>
+	<div id="footer" class="box">
+<div>
+	<p>
+		<a href="about.php">About</a> <a href="help.php">Help</a> 
+		<a href="login.php">Login</a>		<br>&copy; 1993-2021 <a style="text-decoration:none;" href="http://windows93.net">Windows93.net</a>
+	</p>
+</div>	
+</div>	<script>
+		$( ".date" ).each(function( index ) {
+			var time =  timeConverter($( this ).text())
+		 	$( this ).text(time)
+		});
+		var time = Date.now()-parseInt($('#lastLogin').text())
+		if(time<900000||5747==1){
+			$('#online').show()
+		}
+		var time = new Date( parseInt($('#lastLogin').text()) )
+		var d = time.getDate();if (d<10) {d="0"+d};		
+		var m = time.getMonth()+1;if (m<10) {m="0"+m};
+		var y = time.getFullYear();
+		$('#lastLogin').text(	d+'/'+m+'/'+y	); 	</script>
+	<script type="text/javascript" src="index.js"></script>
+	</div>
+</body>
+</html>

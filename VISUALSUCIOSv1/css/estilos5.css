@@ -1,0 +1,69 @@
+/**
+ * Oscuro: #283035
+ * Azul: #03658c
+ * Detalle: #c7cacb
+ * Fondo: #dee1e3
+ ----------------------------------*/
+ @font-face{
+   font-family: code;
+   src: url(/font/code.ttf);
+}
+@font-face{
+   font-family: habbo;
+   src: url(/font/HabboFont.ttf);
+}
+@font-face{
+   font-family: kinder;
+   src: url(/font/kinder.ttf);
+}
+
+ body { 
+  
+    background-color: #4169E1;
+    text-align: center; 
+    padding: 50px; 
+    font: 20px kinder; 
+    color: white;
+
+   }
+   
+  h1{ 
+     font: 10px habbo;
+     font-size: 50px;
+     color: seashell;
+   }
+ 
+  a { 
+     color: #ff2a78; 
+     text-decoration: none; 
+   }
+  a:hover {
+     color: #333; 
+     text-decoration: none; 
+   }
+   .contenedor {
+		width: 80%;
+		max-width: 100%;
+      margin: 0 auto;
+      
+	}
+/** =====================
+* Responsive
+========================*/
+@media screen and (max-width:1280px){
+   .contenedor {
+      width: 90%;
+      
+   }
+}
+@media screen and (max-width:1024px){
+   .contenedor {
+      width: 90%;
+   }
+
+}
+@media screen and (max-width:960px){
+   .contenedor{
+      width: 100%;
+   }
+}

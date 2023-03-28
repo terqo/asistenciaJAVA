@@ -1,0 +1,97 @@
+
+         body, html{
+            background-image: url(/images/Bb.gif);
+            background-size: cover;
+            color: white;
+        }
+        @font-face{
+            font-family: disko;
+            src: url(/font/Disko.ttf);
+        }
+        @font-face{
+			font-family: kinder;
+			src: url(/font/kinder.ttf);
+		}
+        @keyframes load {
+            0%{
+                opacity: 0.08;
+        /*         font-size: 10px; */
+        /* 				font-weight: 400; */
+                        filter: blur(5px);
+                        letter-spacing: 3px;
+                }
+            100%{
+        /*       opacity: 1; */
+        /*       font-size: 12px; */
+        /* 		 font-weight:600; */
+        /* 		 filter: blur(0); */
+                }
+        }
+        
+        .animacion{
+            display:flex;
+            justify-content: left;
+            align-items: center;
+            height:25%;
+            margin: auto;
+            animation: load 1s infinite 0s ease-in-out;
+            animation-direction: alternate; 
+        }
+       
+		h1 {
+            font-family: disko;
+            font-size: 50px;
+            color: black;
+            margin: 30px;
+        }
+        iframe{
+            width:300;
+            height:250;
+            grid-column: auto;
+            margin: 15px;
+            box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+            transition: all 0.2s;
+        }
+        iframe:hover{
+            box-shadow: 0.4rem 0.4rem 0 black;
+            transform: translate(-0.2rem, -0.4rem);
+        }
+
+		.contenedor {
+			width: 80%;
+			max-width: 100%;
+			margin: 0 auto;
+			
+        }
+        
+		footer{
+			font-size: 20px;
+			font-family: kinder;
+			margin: 10px 0px 20px 10px;
+			padding: 1px;
+			border-radius: 20px;
+			background-color: #4169E1;
+			width: 90%;
+			box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+		}
+		footer span{
+			-webkit-text-fill-color: white;
+		}
+		@media screen and (max-width:1280px){
+			.contenedor {
+				width: 90%;
+			}
+
+		}
+		@media screen and (max-width:1024px){
+			.contenedor {
+				width: 90%;
+			}
+
+		}
+		@media screen and (max-width:960px){
+			.contenedor{
+				width: 90%;
+			}
+
+		}

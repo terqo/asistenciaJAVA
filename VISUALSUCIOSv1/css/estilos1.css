@@ -1,0 +1,154 @@
+
+        html{
+            cursor: url(http://cur.cursors-4u.net/symbols/sym-1/sym57.cur), auto !important;
+        }
+        body{
+            background-image: url(https://media.giphy.com/media/l41lZaRlws60dGyac/giphy.gif);
+            background-size:cover;
+            background-color: #2E4053;
+            color: white;
+        }
+        @font-face{
+            font-family: kinder;
+            src: url(/font/kinder.ttf);
+        }
+        @font-face{
+            font-family: code;
+            src: url(/font/code.ttf);
+        }
+        @font-face{
+            font-family: slob;
+            src: url(/font/SecretSlob.ttf);
+        }
+        @font-face{
+            font-family: habbo;
+            src: url(/font/HabboFont.ttf);
+        }
+        @font-face{
+            font-family: urban;
+            src: url(/font/URBAN_HOOK-UPZ.ttf);
+        }
+        @font-face{
+            font-family: disko;
+            src: url(/font/Disko.ttf);
+        }
+        @keyframes load {
+            0%{
+                opacity: 0.08;
+        /*         font-size: 10px; */
+        /* 				font-weight: 400; */
+                        filter: blur(5px);
+                        letter-spacing: 3px;
+                }
+            100%{
+        /*       opacity: 1; */
+        /*       font-size: 12px; */
+        /* 		 font-weight:600; */
+        /* 		 filter: blur(0); */
+                }
+        }
+        
+        .animacion{
+            display:flex;
+            justify-content: left;
+            align-items: center;
+            height:25%;
+            margin: auto;
+            animation: load 1s infinite 0s ease-in-out;
+            animation-direction: alternate;
+            font-family: habbo;
+            font-size: 50px;
+            color: #ffffff;
+            margin: 30px;
+        }
+        .contenedor {
+			width: 80%;
+			max-width: 100%;
+			margin: 0 auto;
+			
+        }
+        h2{
+            font-family: disko;
+            font-size: 25px;
+            color: white;
+        }
+        p{
+            font-family: code;
+            font-size: 15px;    
+            color: white;
+        }
+        a{
+            color: blue;		
+            text-decoration:none;
+            padding:5px 0px;
+        }
+        a.contacto:hover{
+            background-color: #4169E1;
+            text-decoration: none;
+            color: white;
+            border-radius:5px;
+            border: 1px solid black;
+        }
+        img	{
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.90);
+            border-radius: 20px;
+            margin: 7px auto;
+            width:100%;
+            border-radius: 14px;
+            height: auto;
+        }
+        	
+        button{
+            background-image: url(https://media.giphy.com/media/Fd5Za70axpNjq/giphy.gif);
+            width:300;
+            height:auto;
+            grid-column: auto;
+            margin: 15px;
+            box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        button:hover{
+            box-shadow: 0.4rem 0.4rem 0 black;
+            transform: translate(-0.2rem, -0.4rem);
+        }
+        #creator{
+            font-family: disko;
+            font-size: 30px;
+            padding-top: 5px;
+            float: none;
+            margin-bottom: 5px;
+            color: red;
+        }
+        .footer{
+            
+			margin: 10px 0px 20px 10px;
+			padding: 1px;
+			border-radius: 20px;
+			background-color: transparent;
+			width: 90%;
+			box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+        }
+		.footertext{
+			font-size: 20px;
+			font-family: kinder;
+		}
+		
+		@media screen and (max-width:1280px){
+			.contenedor {
+				width: 90%;
+			}
+
+		}
+		@media screen and (max-width:1024px){
+			.contenedor {
+				width: 90%;
+			}
+
+		}
+		@media screen and (max-width:960px){
+			.contenedor{
+				width: 90%;
+			}
+
+		}

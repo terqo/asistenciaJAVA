@@ -1,0 +1,92 @@
+body {
+    background-image: url(http://2.bp.blogspot.com/-DGgCwATydQQ/VBqengam-II/AAAAAAAALHg/r729V8NDlVA/s1600/tumblr_mrsty0QeA21r8ptfdo1_500.gif);
+    background-size: cover;
+    background-color: #2E4053;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.contenedor {
+    background-color: white;
+    margin: 400px auto 40px;
+    padding: 30px;
+    align-items: center;
+    border: 3px;
+    border: 2px solid black;
+    border-radius: 15px ;
+}
+h1{
+    text-align: center;
+    padding: auto;
+    margin: 150px;
+    color: red;
+}
+span::before {
+    color: #7077ca;
+    font-size: 16px;
+    font-family: garamond;
+    animation-name: rainbow;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation: blinkingTextYellow 0.3s infinite;
+}
+h2,h3{
+    text-align: center;
+}
+img{
+    margin:auto;
+    width:50%;
+    border-radius: 14px;
+    height: auto;
+    display: block;
+}
+
+button{
+    align-items: center;
+    text-align: center;
+}
+table {
+    border: 3px solid black;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+td{
+    text-align: left;
+
+}
+.cripto{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+thead th:nth-child(1) {
+    width: 30%;
+}
+
+thead th:nth-child(2) {
+    width: 20%;
+}
+
+thead th:nth-child(3) {
+    width: 15%;
+}
+
+thead th:nth-child(4) {
+    width: 35%;
+}
+
+th,
+td {
+    padding: 20px;
+    width: 25%;
+    text-align: justify;
+    vertical-align: top;
+    border: 1px solid #000;
+}
+
+p {
+    text-align: justify;
+}

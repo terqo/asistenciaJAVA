@@ -1,0 +1,181 @@
+
+
+@font-face {
+    font-family: custom;
+    src: url(/fonts/Anton-Regular.ttf);
+}
+.contenedor{
+    background-color: #fff;
+    cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    height: 100px;
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border-style: solid;
+    border-width: 5px;
+    box-shadow: 
+    10px -10px 0 -3px #fff,
+    10px -10px,
+    20px -20px 0 -3px #fff,
+    20px -20px;
+    transition: 0.7s ease-in-out;
+    top: 35%;
+    left: 0%;
+    position: absolute;
+}
+.contenedor:hover {
+
+    box-shadow: 0px 0px 0 -3px #fff,
+      0px 0px,
+      0px 0px 0 -3px #fff,
+      0px 0px;
+  }
+h2, a{
+    color: black;
+    font-family: custom;
+    font-size: large;
+}
+
+#myVideo {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+
+  }
+
+  .hidden {
+    display: contents;
+  }
+  
+  /** Buttons **/
+  .btn {
+    background-color: transparent;
+    border-radius: 2em;
+    border: 0.2em solid black;
+    color: black;
+    cursor: pointer;
+    font-size: 3vmin;
+    padding: 0.7em 1.5em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+  
+  .btn:hover {
+    background: black;
+    color: white;
+  }
+  
+  .btn--login {
+    margin: 0 auto;
+  }
+  
+  /** Now Playing **/
+  .now-playing__name {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
+  }
+  
+  .now-playing__artist {
+    margin-bottom: 1em;
+  }
+  
+  .now-playing__status {
+    margin-bottom: 1em;
+  }
+  
+  .now-playing__img {
+    float: left;
+    margin-right: 10px;
+    text-align: right;
+    width: 45%;
+  }
+  
+  .now-playing__img img {
+    max-width: 80vmin;
+    width: 100%;
+  }
+  
+  .now-playing__side {
+    margin-left: 5%;
+    width: 45%;
+  }
+  
+  /** Progress **/
+  .progress {
+    border: 0.15em solid #eee;
+    height: 1em;
+  }
+  
+  .progress__bar {
+    background-color: #eee;
+    border: 0.1em solid transparent;
+    height: 0.75em;
+  }
+  
+  /** Background **/
+  .background {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center center;
+    filter: blur(8em) opacity(0.6);
+    position: absolute;
+  }
+  
+  .main-wrapper {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+    z-index: 1;
+  }
+  
+  .container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .main-container {
+    flex: 1;
+  }
+
+@media screen and (min-width:1280px){
+    .contenedor {
+        width: 50%;
+        left: 23%;
+    }
+    
+}
+
+@media screen and (max-width:1024px){
+    .contenedor {
+        width: 50%; 
+        left: 20%;
+    }
+    #myVidPlayer{
+      width: 50%; 
+    }
+    #canvas{
+      width: 100%;
+    }
+
+}
+@media screen and (max-width:430px){
+    .contenedor {	
+        width: 60%;
+        left: 10%;
+    }
+}

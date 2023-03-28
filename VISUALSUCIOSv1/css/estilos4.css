@@ -1,0 +1,91 @@
+
+body{
+    font-family: 'Ubuntu Mono', monospace;
+    color: red;
+    margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+    background: black;
+}
+@font-face{
+    font-family: kinder;
+    src: url(/font/kinder.ttf);
+}
+.values{
+    margin: 30px 0 20px 0;
+}
+a{
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+}
+button.boton2 {
+    background: none;
+    color: #ccc;
+    width: 180px;
+    height: 35px;
+    border:2px solid rgb(95, 126, 220);
+    border-radius: 10px;
+    transition: .5s;
+    overflow: hidden;
+    outline: none;
+
+}
+button:hover {
+    background: rgb(95, 126, 220);
+    cursor: pointer;
+}
+   button:hover::before{
+       transform: translateX(300px)skewX(-15deg);
+       opacity: .6;
+       transition: 1s;
+   }
+   button:hover::after{
+    transform: translateX(300px)skewX(-15deg);
+    opacity: .1;
+    transition: 9s;
+}
+
+footer{
+    font-size: 20px;
+    font-family: kinder;
+    margin: 10px 0px 20px 10px;
+    padding: 1px;
+    border-radius: 20px;
+    background-color: #4169E1;
+    width: 90%;
+    box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+}
+footer span{
+    -webkit-text-fill-color: white;
+}
+.contenedor{
+    width: 85%;
+    max-width: 100%;
+    margin: 0 auto;
+    
+}
+.p1{
+    color: #1E2A;
+}
+.p2{
+    color: purple;
+}
+#audio1{
+    display: none;
+}
+input.play{
+    float:center;
+    width: 65px;
+    cursor: pointer;
+}
+input.pause{
+    display: flex;
+    padding-right: 20px;
+    width: 100%;
+    float: left;
+    border-color: black;
+    background: none;
+    cursor: pointer;
+}
+

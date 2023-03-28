@@ -1,0 +1,135 @@
+
+		body {
+			font-family: 'Ubuntu Mono', monospace;
+			font-size: 16px;
+			background-image: url(/images/road.gif) ;
+			background-size: cover;
+			margin:0;
+			box-sizing: border-box;
+		}
+		@font-face{
+			font-family: kinder;
+			src: url(/font/kinder.ttf);
+		}
+
+		h1 {
+			color: #ffffff;
+			background: rgb(95, 126, 220);
+			border-radius: 13px;
+			box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+		}
+		h2 {
+		    color: #fd0296;
+		}
+		img {
+            height: 200px;
+            width: 200px;
+			margin: 0 0 30px ;
+            border: 7px solid black;
+            border-radius:10px;
+            grid-column: 1 / -1;
+            box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+		}
+		a {
+			color: #000000;
+			padding:5px 0px;
+			text-decoration: none;
+			cursor: pointer;
+        }
+		button {
+			font-size: 1rem;
+			color: #000000;
+			text-decoration: none;
+			outline: none;
+			margin: 10px 0 20px 0;
+			border-radius: 2rem;
+		  }
+
+		button.bton {
+			background: none;
+			color: black;
+			width: 180px;
+			height: 50px;
+			border:2px solid rgb(95, 126, 220);
+			border-radius: 10px;
+			transition: .5s;
+			overflow: hidden;
+			outline: none;
+			margin: 10px 0 20px 0;
+		}
+
+		button.bton:hover {
+			background: #9e9b9b;
+			cursor: pointer;
+		}
+			button.bton:hover::before{
+			   transform: translateX(300px)skewX(-15deg);
+			   opacity: .6;
+			   transition: 1s;
+		   }
+		   button.bton:hover::after{
+			transform: translateX(300px)skewX(-15deg);
+			opacity: .1;
+			transition: 9s;
+		}
+		
+		textarea {
+            outline: none;
+            height: 80px;
+			width: 70%;
+			font-size: 17PX;
+		}
+		.contenedor {
+			width: 80%;
+			max-width: 100%;
+			margin: 0 auto;
+			
+        }
+        .qrbox{
+			width: 80%;
+			max-width: 100%;
+			margin: 100px 0 100px 0;
+		}
+		.icon-twitter{
+			color: #4169E1;
+			cursor: pointer;
+			float: right;
+		}
+		
+		footer{
+			font-size: 20px;
+			font-family: kinder;
+			margin: 10px 0px 20px 10px;
+			padding: 1px;
+			border-radius: 20px;
+			background-color: #4169E1;
+			width: 90%;
+			box-shadow: 9px 7px 8px 6px rgba(0,0,0,0.75);
+		}
+		footer span{
+			-webkit-text-fill-color: white;
+		}
+		@media screen and (max-width:1280px){
+			.contenedor {
+				width: 90%;
+			}
+			.qrbox{
+				width: 90%;
+			}
+		}
+		@media screen and (max-width:1024px){
+			.contenedor {
+				width: 90%;
+			}
+			.qrbox{
+				width: 90%;
+			}
+		}
+		@media screen and (max-width:960px){
+			.contenedor{
+				width: 90%;
+			}
+			.qrbox{
+				width: 90%;
+			}
+		}

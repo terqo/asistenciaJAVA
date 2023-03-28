@@ -1,0 +1,102 @@
+<html>
+    <head>
+            <meta charset="utf-8">
+            <title>Labels</title>
+            <link rel="icon" href="images/fantasma3.png">
+            <link rel="stylesheet" type="text/css" href="css/estilos2.css">
+            <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    </head>
+    <body>
+      <div class="contenedor">
+
+	    <center>
+        <h1>Centro de Labels de twitter </h1>
+        <h1>Bienvenido</h1>
+        </center>
+
+            <div class="funcion">
+                <center>
+                <h2>¿Cómo funciona?</h2>
+                </center>
+                    <figure>
+
+                        <img src="images/Tweet.png" alt="Labels de un tweet" class="tweet">
+                        <p class="principal">
+                          El sitio está diseñado con Twitter API y con las apps que esté nos proporciona,
+                          esto para poder enviar tweets desde tu cuenta, brindandonos acceso al "Twitter for..."
+                          de los tweets.
+                        </p>
+
+                    </figure>
+             </div>
+             <center>
+               <h2>Predeterminadas</h2>
+             </center>
+
+             <div class="personalizados">
+                    <form  action="" method="post">
+                    <p>Selecciona el label que quieras utilizar:</p>
+                    <select class="label1">
+                        <option disabled="" selected="" value="twitter">Twitter for ...</option>
+                        <option value="olympus">Twitter Olympus Client</option> 
+                        <option value="CEO">Twitter for CEO'S</option>
+                        <option value="PRO">Twitter for Airpods Pro.</option>
+                        <option value="TEK">Twitter for TEKMATE</option>
+                        <option value="tesla">Twitter for Tesla Motors</option>
+                        <option value="WW">Twitter for WWIII</option>
+                        <option value="kill">Twitter for Killers</option>
+                        <option value="fairy">Fairy World</option>
+                        <option value="pixie">Pixie World</option>
+                    </select>
+                    <br><br>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary btn-sm" onclick="authRedirect()" style="background-color: #1da1f2;"
+                            type="button">Iniciar Sesion
+                            <i class="fa fa-twitter"></i>
+                        </button>
+                    </div>
+                    </form>
+             </div>
+
+             <center>
+               <h2>¿Quieres utilizar tus propias API Apps?</h2>
+            </center>
+
+            <form action=""  >
+              <strong>App API Key's</strong><br><br>
+              <label for="key">Key:</label>
+              <input type="text" name="key" required="required" placeholder=" API key"> <br><br>
+              <label for="secret">Secret:</label>
+              <input type="text" name="secret" required placeholder=" API secret key"> <br><br>
+
+              <strong>Información Acceso a la App</strong><br><br>
+
+              <label for="token">Token:</label>
+              <input type="text" name="token" required placeholder=" Access token"> <br><br>
+              <label for="secret2">Secret:</label>
+              <input type="text" name="secret2" required placeholder=" Access token secret">
+
+              <br><br>
+
+              <textarea name="Tweet" rows="8" cols="80" placeholder="Escribe aquí tu tweet" required></textarea>
+
+              <br><br>
+
+              <input type="submit" name="submit" value="Enviar">
+            </form>
+            
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script>
+            
+            <br>
+            <center>
+              <p>Porcentaje Labels:</p>
+					      <progress value="80" max="100">Porcentaje pagina</progress>
+            <footer>
+              <p id="copy"><span>Copyright&copy;2020  |Visual Sucios&reg;| Derechos casi reservados</span></p>
+            </footer>
+            </center>
+      </div>
+    </body>
+
+</html>
