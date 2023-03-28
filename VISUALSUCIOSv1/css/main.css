@@ -132,37 +132,10 @@ a.contacto{
     margin-bottom: 5px;
 }
 
-
-@media screen and (max-width:1280px){
-    .contenedor {
-        width: 70%;
-    }
-    .tuit{
-        border-radius: 22px; 
-        width: 80px;
-    }
-    
-}
-
-@media screen and (max-width:1024px){
-    .contenedor {
-        width: 90%;
-        
-    }
-    .tuit{
-        border-radius: 22px; 
-        width: 70px;
-    }
-}
-
-@media screen and (max-width:960px){
+@media screen and (max-width:480px){
     .contenedor {	
-        width: 75%;
+        width: 80%;
         
-    }
-    .tuit{
-        border-radius: 22px; 
-			width: 75px;
     }
     p span{
         font-size: 20px;
@@ -173,7 +146,7 @@ a.contacto{
 
 @media (min-width: 1140px) {
     .contenedor{
-        width: auto;
+        width: 40%;
     }
 }
 
