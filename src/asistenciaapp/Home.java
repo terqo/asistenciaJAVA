@@ -23,7 +23,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
- * @author oscar
+ * @author oscar arroyo 13/03/2023 iztapalapa para el mundo
+ * terqo company
  */
 public class Home extends javax.swing.JFrame {
 
@@ -38,7 +39,7 @@ public class Home extends javax.swing.JFrame {
     }
     //icono form
     public void iconImage(){
-        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/ag.png");
+        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/company.jpg");
         this.setIconImage(icono.getImage());
     }
     public Home() {
@@ -131,7 +132,7 @@ public class Home extends javax.swing.JFrame {
         System.out.println(sql);    
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("Nombre");
+        model.addColumn("Apellido");
         model.addColumn("Fecha/Hora");
         tableDatos.setModel(model);
         
@@ -376,7 +377,7 @@ public class Home extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Control AsistenciaAG");
+        setTitle("Control Asistencia");
         setBackground(new java.awt.Color(51, 0, 102));
         setResizable(false);
 

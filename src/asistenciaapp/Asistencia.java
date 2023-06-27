@@ -23,9 +23,23 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.imageio.ImageIO;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -33,8 +47,23 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * author oscar arroyo 13/03/2023 iztapalapa para el mundo
+ * terqo company
  */
 public class Asistencia extends javax.swing.JFrame {
+    
+    private static String emailFrom = "oscarinag00@gmail.com";
+    private static String passwordFrom = "jobbbjeiaihabpci";
+    
+    private String emailTo;
+    private String subject;
+    private String content;
+
+    private Properties mProperties;
+    private Session mSession;
+    private MimeMessage mCorreo;
+    
+    private File[] mArchivosAdjuntos;
+    private String nombres_archivos;
     
     public PreparedStatement ps;
     public ResultSet rs = null;
@@ -54,12 +83,13 @@ public class Asistencia extends javax.swing.JFrame {
         initComponents();
         initTimer();
         initWebcam();
+        mProperties = new Properties();
         mostrarDatosTablaRegistros("registro");
         iconImage();
     }
     //icono form
     public void iconImage(){
-        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/ag.png");
+        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/company.jpg");
         this.setIconImage(icono.getImage());
     }
     private void initTimer() {
@@ -75,7 +105,112 @@ public class Asistencia extends javax.swing.JFrame {
         });
         timer.start();
     }
+        private void createEmail(String contenido) {
+        emailTo = "Oscarinag00@gmail.com";
+        subject = "pase de asistencia " ;
+        content = contenido;
+        
+         // Simple mail transfer protocol
+        mProperties.put("mail.smtp.host", "smtp.gmail.com");
+        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mProperties.setProperty("mail.smtp.starttls.enable", "true");
+        mProperties.setProperty("mail.smtp.port", "587");
+        mProperties.setProperty("mail.smtp.user",emailFrom);
+        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mProperties.setProperty("mail.smtp.auth", "true");
+        
+        mSession = Session.getDefaultInstance(mProperties);
+        
+        
+        try {
+            MimeMultipart mElementosCorreo = new MimeMultipart();
+            // Contenido del correo
+            MimeBodyPart mContenido = new MimeBodyPart();
+            mContenido.setContent(content, "text/html; charset=utf-8");
+            mElementosCorreo.addBodyPart(mContenido);
+            
+            //Agregar archivos adjuntos.
+            //MimeBodyPart mAdjuntos = null;
+            //for (int i = 0; i < mArchivosAdjuntos.length; i++) {
+               // mAdjuntos = new MimeBodyPart();
+                //mAdjuntos.setDataHandler(new DataHandler(new FileDataSource(mArchivosAdjuntos[i].getAbsolutePath())));
+                //mAdjuntos.setFileName(mArchivosAdjuntos[i].getName());
+                //mElementosCorreo.addBodyPart(mAdjuntos);
+            //}
+            
+            mCorreo = new MimeMessage(mSession);
+            mCorreo.setFrom(new InternetAddress(emailFrom));
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
+            mCorreo.setSubject(subject);
+            mCorreo.setContent(mElementosCorreo);
+                     
+            
+        } catch (AddressException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void sendEmail() {
+        try {
+            Transport mTransport = mSession.getTransport("smtp");
+            mTransport.connect(emailFrom, passwordFrom);
+            mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
+            mTransport.close();
+            
+            JOptionPane.showMessageDialog(null, "Correo enviado");
+            //lblAdjuntos.setText("");
+            nombres_archivos = "";
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void registrarDatosAsistencia(String idEmpleado) {
+    try {
+        dbAG con = new dbAG();
+        Connection dbAG = con.Conectar();
+        ps = dbAG.prepareStatement("SELECT apellido FROM empleado WHERE id = ?");
+        ps.setString(1, idEmpleado);
+        rs = ps.executeQuery();
+        String apellidoEmpleado = "";
+        if (rs.next()) {
+            apellidoEmpleado = rs.getString("apellido");
+        }
+        // Obtener la fecha y hora actual
+        LocalDate fechaActual = LocalDate.now();
+        LocalTime horaActual = LocalTime.now();
+
+
+        // Insertar los datos del nuevo registro en la tabla correspondiente
+        PreparedStatement stmt = dbAG.prepareStatement("INSERT INTO registro (id, nombre, fecha) VALUES (?, ?, ?)");
+        stmt.setString(1, idEmpleado);
+        stmt.setString(2, apellidoEmpleado);
+        stmt.setString(3, fechaActual.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + horaActual.format(DateTimeFormatter.ISO_LOCAL_TIME));
     
+        int res = stmt.executeUpdate();
+        
+        JOptionPane.showMessageDialog(null, "¡Hola "+ apellidoEmpleado + "! tu asistencia se ha guardado con éxito.\nVerifica que se haya registrado.", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE); 
+        System.out.println("Nuevo registro insertado con éxito.");
+        nombreTxt.setText(apellidoEmpleado);
+        idTxt.setText(idEmpleado);
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al insertar el registro: " + e.getMessage(), "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+        System.out.println("Error al insertar el registro: " + e.getMessage());
+    } finally {
+        // Cerrar los recursos y la conexión
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cerrar los recursos: " + e.getMessage(), "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Error al cerrar los recursos: " + e.getMessage());
+        }
+    }
+}
     private void initWebcam() {
         
         webcam = Webcam.getDefault();
@@ -162,57 +297,15 @@ public class Asistencia extends javax.swing.JFrame {
         });
         t.start();
     }  
-    public void registrarDatosAsistencia(String idEmpleado) {
-    try {
-        dbAG con = new dbAG();
-        Connection dbAG = con.Conectar();
-        ps = dbAG.prepareStatement("SELECT nombre FROM empleado WHERE id = ?");
-        ps.setString(1, idEmpleado);
-        rs = ps.executeQuery();
-        String nombreEmpleado = "";
-        if (rs.next()) {
-            nombreEmpleado = rs.getString("nombre");
-        }
-        // Obtener la fecha y hora actual
-        LocalDate fechaActual = LocalDate.now();
-        LocalTime horaActual = LocalTime.now();
-
-
-        // Insertar los datos del nuevo registro en la tabla correspondiente
-        PreparedStatement stmt = dbAG.prepareStatement("INSERT INTO registro (id, nombre, fecha) VALUES (?, ?, ?)");
-        stmt.setString(1, idEmpleado);
-        stmt.setString(2, nombreEmpleado);
-        stmt.setString(3, fechaActual.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + horaActual.format(DateTimeFormatter.ISO_LOCAL_TIME));
-    
-        int res = stmt.executeUpdate();
-        
-        JOptionPane.showMessageDialog(null, "¡Hola "+ nombreEmpleado + "! tu asistencia se ha guardado con éxito.\nVerifica que se haya registrado.", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE); 
-        System.out.println("Nuevo registro insertado con éxito.");
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al insertar el registro: " + e.getMessage(), "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-        System.out.println("Error al insertar el registro: " + e.getMessage());
-    } finally {
-        // Cerrar los recursos y la conexión
-        try {
-            if (rs != null) rs.close();
-            if (ps != null) ps.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al cerrar los recursos: " + e.getMessage(), "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Error al cerrar los recursos: " + e.getMessage());
-        }
-    }
-}
     public void mostrarDatosTablaRegistros(String tabla){
-        String sql = "SELECT * FROM "+ tabla + " ORDER BY fecha DESC LIMIT 1";
+        String sql = "SELECT * FROM "+ tabla + " ORDER BY fecha DESC LIMIT 3";
         Statement st;
         dbAG con = new dbAG();
         Connection dbAG = con.Conectar();
         System.out.println(sql);    
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("Nombre");
+        model.addColumn("Apellido");
         model.addColumn("Fecha/Hora");
         tableDatos.setModel(model);
         
@@ -231,15 +324,7 @@ public class Asistencia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR" + e.toString());
         }
     }
-    public void seleccionarOpcion(JComboBox comboBox, String opcion) {
-        for (int i = 0; i < comboBox.getItemCount(); i++) {
-            if (comboBox.getItemAt(i).toString().equals(opcion)) {
-                comboBox.setSelectedIndex(i);
-                System.out.println("Hola, vengo de combobox");
-                break;
-            }
-        }
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -258,6 +343,8 @@ public class Asistencia extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDatos = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
+        nombreTxt = new javax.swing.JTextField();
+        idTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asistencia");
@@ -310,7 +397,6 @@ public class Asistencia extends javax.swing.JFrame {
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
-                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -325,6 +411,7 @@ public class Asistencia extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tableDatos);
 
         btnBack.setText("Regresar");
@@ -335,6 +422,11 @@ public class Asistencia extends javax.swing.JFrame {
             }
         });
 
+        nombreTxt.setEnabled(false);
+
+        idTxt.setText("ID");
+        idTxt.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -343,16 +435,24 @@ public class Asistencia extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                            .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(qrCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(horaLabel)
-                            .addComponent(jLabel1))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(horaLabel)
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nombreTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(idTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -361,18 +461,21 @@ public class Asistencia extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(qrCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(horaLabel)
-                        .addGap(18, 18, 18)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(horaLabel))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(qrCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -396,7 +499,20 @@ public class Asistencia extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.setVisible(false);
-        new Login().setVisible(true);        // TODO add your handling code here:
+        new Login().setVisible(true);
+        String apellido = nombreTxt.getText();
+        String id = idTxt.getText();
+        String nulo = "Nombre";
+        LocalTime horaActual = LocalTime.now();
+        //si el apellido esta vacio, no enviar correo
+        if(apellido.isEmpty()){
+            System.out.println("no se envio el correo porq esta vacio");
+        }else{ // se envia correo si tiene un valor
+            createEmail("Hola Company, "+apellido + " acaba de pasar asistencia. son las " + horaActual.format(DateTimeFormatter.ISO_LOCAL_TIME));
+            System.out.println("Nuevo correo creado con éxito.");
+            sendEmail();
+        }
+       
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**
@@ -439,11 +555,13 @@ public class Asistencia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel horaLabel;
+    private javax.swing.JTextField idTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nombreTxt;
     private javax.swing.JPanel qrCode;
     private javax.swing.JTable tableDatos;
     // End of variables declaration//GEN-END:variables

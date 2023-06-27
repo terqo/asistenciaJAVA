@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/lib/AbsoluteLayout.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/zxing-core-1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/qrgen-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/core-3.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/poi-3.7-20101029.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/slf4j-api-1.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/tools-maven-plugin-1.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/Webcam.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/zxing-j2se-1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/javase-3.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/mysql-connector-j-8.0.32.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/bridj-0.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
