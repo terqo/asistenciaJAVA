@@ -51,8 +51,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Asistencia extends javax.swing.JFrame {
     
-    private static String emailFrom = "oscarinag00@gmail.com";
-    private static String passwordFrom = "jobbbjeiaihabpci";
+    private static String emailFrom = "";
+    private static String passwordFrom = "";
     
     private String emailTo;
     private String subject;
