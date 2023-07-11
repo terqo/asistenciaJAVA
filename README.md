@@ -29,11 +29,12 @@ Programas necesarios para que corra la aplicación:
 - Java | https://www.java.com/es/download/ie_manual.jsp.
 - Java JDK | https://www.oracle.com/java/technologies/downloads/.
 - Xampp | https://www.apachefriends.org/es/download.html.
+- Neatbeans(IDE utilizado) | https://netbeans.apache.org/download/nb18/
 ------
+Se activan los módulos Apache y MySQL.
 ![imagen](https://github.com/terqo/asistenciaJAVA/assets/44992155/18164b7b-f20c-4518-83e3-44fd21287e4b)
-Se activan los módulos Apache y MySQL 
 
-La base de datos se llama asistenciadb y estas son las tables que lleva
+La base de datos se llama asistenciadb y estas son las tables que lleva.
 ![imagen](https://github.com/terqo/asistenciaJAVA/assets/44992155/4487113c-4c78-4b8b-9e55-5a850d4f99fd)
 
 o se puede modificar el nombre de la base de datos en el código fuente.
