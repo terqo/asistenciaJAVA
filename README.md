@@ -14,8 +14,8 @@ La aplicación tiene funciones como:
 - Genera reporte en archivo Excel de todos los registros de códigos QR (literal)
 - Soporta cualquier tipo de cámara (Windows)
 <br>
-En el sistema operativo Mac Os no funciona la librería de la cámara 
-No se ha testeado en Linux
+En el sistema operativo Mac Os no funciona la librería de la cámara.
+No se ha testeado en Linux.
 
 ![imagen](https://github.com/terqo/asistenciaJAVA/assets/44992155/03512fd2-be83-4892-aabd-a333801ee1b6)
 ![imagen](https://github.com/terqo/asistenciaJAVA/assets/44992155/bf904b37-95b0-437f-9970-e6b36cfb81ab)
@@ -31,6 +31,7 @@ Programas necesarios para que corra la aplicación:
 - Xampp | https://www.apachefriends.org/es/download.html.
 - Neatbeans(IDE utilizado) | https://netbeans.apache.org/download/nb18/
 ------
+
 Se activan los módulos Apache y MySQL.
 ![imagen](https://github.com/terqo/asistenciaJAVA/assets/44992155/18164b7b-f20c-4518-83e3-44fd21287e4b)
 
