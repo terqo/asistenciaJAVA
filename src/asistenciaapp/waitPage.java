@@ -40,8 +40,7 @@ public class waitPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("init");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setEnabled(false);
         setResizable(false);
 
@@ -121,7 +120,7 @@ public class waitPage extends javax.swing.JFrame {
                 waitPage.dispose();// Cerrar el JFrame actual
 
                 // Abrir otro JFrame
-                new Login().setVisible(true);
+                new Home_Page().setVisible(true);
                 }
                 
                 });

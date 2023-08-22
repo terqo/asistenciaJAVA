@@ -1,10 +1,6 @@
 package asistenciaapp;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.*;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 
 /**
@@ -12,9 +8,9 @@ import javax.swing.JOptionPane;
  * @author oscar arroyo 13/03/2023 iztapalapa para el mundo
  * terqo company
  */
-public class Login extends javax.swing.JFrame{
+public class Home_Page extends javax.swing.JFrame{
 
-    public Login() {
+    public Home_Page() {
         initComponents();
         iconImage();
     }
@@ -36,10 +32,11 @@ public class Login extends javax.swing.JFrame{
         jPanel1 = new javax.swing.JPanel();
         btnAdmin = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
+        btn_Huella = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login Registro");
+        setTitle("Home");
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -59,11 +56,20 @@ public class Login extends javax.swing.JFrame{
         });
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asistenciaapp/img/registro.png"))); // NOI18N
-        btnRegistrar.setText("ASISTENCIA");
+        btnRegistrar.setText("ASISTENCIA QR");
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        btn_Huella.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asistenciaapp/img/dedo_detectado.png"))); // NOI18N
+        btn_Huella.setText("ASISTENCIA HUELLA");
+        btn_Huella.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_Huella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HuellaActionPerformed(evt);
             }
         });
 
@@ -73,19 +79,23 @@ public class Login extends javax.swing.JFrame{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_Huella, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                .addGap(18, 18, 18)
+                .addComponent(btn_Huella, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setBackground(new java.awt.Color(102, 255, 102));
@@ -143,13 +153,18 @@ public class Login extends javax.swing.JFrame{
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         this.setVisible(false);
-        new Asistencia().setVisible(true);
+        new Qr_Page().setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         this.setVisible(false);
-        new Admin().setVisible(true);
+        new Login_Page().setVisible(true);
     }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btn_HuellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HuellaActionPerformed
+        this.setVisible(false);
+        new Huella_Page().setVisible(true);
+    }//GEN-LAST:event_btn_HuellaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,20 +183,21 @@ public class Login extends javax.swing.JFrame{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Home_Page().setVisible(true);
             }
         });
     }
@@ -189,6 +205,7 @@ public class Login extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btn_Huella;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

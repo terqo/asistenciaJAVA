@@ -26,7 +26,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author oscar arroyo 13/03/2023 iztapalapa para el mundo
  * terqo company
  */
-public class Home extends javax.swing.JFrame {
+public class Control_Page extends javax.swing.JFrame {
 
     PreparedStatement ps;
     
@@ -42,7 +42,7 @@ public class Home extends javax.swing.JFrame {
         ImageIcon icono = new ImageIcon("src/asistenciaapp/img/company.jpg");
         this.setIconImage(icono.getImage());
     }
-    public Home() {
+    public Control_Page() {
         initComponents();   
         tablaActualizarFalse();
         mostrarDatosSeleccionados();
@@ -69,6 +69,8 @@ public class Home extends javax.swing.JFrame {
         btnEliminar.setVisible(false);
         btnLimpiar.setVisible(false);
         btnDescargar.setVisible(false);
+        btnHuella.setVisible(false);
+
     }
     private void tablaActualizarTrue(){
         label2.setVisible(true);
@@ -90,6 +92,7 @@ public class Home extends javax.swing.JFrame {
         tableDatos.setVisible(true);
         btnDescargar.setVisible(true);
         btnLimpiar.setVisible(true);
+        btnHuella.setVisible(true);
     }
     public void mostrarDatosTabla(String tabla){
         String sql = "select * from "+ tabla;
@@ -367,6 +370,7 @@ public class Home extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnHuella = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAsistencia = new javax.swing.JMenu();
         menuReportAsisten = new javax.swing.JMenuItem();
@@ -477,6 +481,8 @@ public class Home extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
+        btnHuella.setText("Huella");
+
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
 
         menuAsistencia.setText("Control de Asistencia");
@@ -554,7 +560,8 @@ public class Home extends javax.swing.JFrame {
                                     .addGap(35, 35, 35)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnHuella))))
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -607,7 +614,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -618,7 +625,9 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(btnLimpiar))
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLabel)
+                            .addComponent(btnHuella))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblcodigoQR, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))))
@@ -649,7 +658,7 @@ public class Home extends javax.swing.JFrame {
 
     private void menuNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNewUserActionPerformed
         this.setVisible(false);
-        new Registro().setVisible(true);
+        new Registro_Page().setVisible(true);
     }//GEN-LAST:event_menuNewUserActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -658,7 +667,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         this.setVisible(false);
-        new Home().setVisible(true);
+        new Control_Page().setVisible(true);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
@@ -689,7 +698,7 @@ public class Home extends javax.swing.JFrame {
 			mesj = JOptionPane.showConfirmDialog(null, "Esta Seguro Que Desea Cerrar Sesión ", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if (mesj == JOptionPane.YES_OPTION) {        
                                 this.setVisible(false);
-                                new Login().setVisible(true);
+                                new Home_Page().setVisible(true);
 				JOptionPane.showMessageDialog(this, "Sesion Cerrada Exitosamente","Hasta Luego",JOptionPane.INFORMATION_MESSAGE);
 				
 			} else {
@@ -715,20 +724,23 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Control_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Control_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Control_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Control_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Control_Page().setVisible(true);
             }
         });
     }
@@ -738,6 +750,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnHuella;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegister;
     private javax.swing.JFileChooser jFileChooser1;

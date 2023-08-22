@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  * @author oscar arroyo 13/03/2023 iztapalapa para el mundo
  * terqo company
  */
-public class Admin extends javax.swing.JFrame {
+public class Login_Page extends javax.swing.JFrame {
 
     /**
      * Creates new form Admin
      */
-    public Admin() {
+    public Login_Page() {
         initComponents();
         PressEnter();
         iconImage();
@@ -68,7 +68,7 @@ public class Admin extends javax.swing.JFrame {
                 rs = pst.executeQuery();
                 if (rs.next()){
                     this.dispose();
-                    new Home().setVisible(true);
+                    new Control_Page().setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Vuelve a intentar de nuevo.");
                 }
@@ -236,7 +236,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.setVisible(false);
-        new Login().setVisible(true);        // TODO add your handling code here:
+        new Home_Page().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
@@ -260,20 +260,21 @@ public class Admin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin().setVisible(true);
+                new Login_Page().setVisible(true);
             }
         });
     }
