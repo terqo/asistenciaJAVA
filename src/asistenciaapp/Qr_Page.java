@@ -1,6 +1,6 @@
 package asistenciaapp;
 
-import asistenciaapp.conexion.dbAG;
+import asistenciaapp.conexion.conexionDB;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -89,7 +89,7 @@ public class Qr_Page extends javax.swing.JFrame {
     }
     //icono form
     public void iconImage(){
-        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/company.jpg");
+        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/inTime2.png");
         this.setIconImage(icono.getImage());
     }
     private void initTimer() {
@@ -169,7 +169,7 @@ public class Qr_Page extends javax.swing.JFrame {
     }
     public void registrarDatosAsistencia(String idEmpleado) {
     try {
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
         ps = dbAG.prepareStatement("SELECT apellido FROM empleado WHERE id = ?");
         ps.setString(1, idEmpleado);
@@ -300,7 +300,7 @@ public class Qr_Page extends javax.swing.JFrame {
     public void mostrarDatosTablaRegistros(String tabla){
         String sql = "SELECT * FROM "+ tabla + " ORDER BY fecha DESC LIMIT 3";
         Statement st;
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
         System.out.println(sql);    
         DefaultTableModel model = new DefaultTableModel();

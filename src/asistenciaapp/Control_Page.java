@@ -1,6 +1,6 @@
 package asistenciaapp;
 
-import asistenciaapp.conexion.dbAG;
+import asistenciaapp.conexion.conexionDB;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -39,7 +39,7 @@ public class Control_Page extends javax.swing.JFrame {
     }
     //icono form
     public void iconImage(){
-        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/company.jpg");
+        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/inTime2.png");
         this.setIconImage(icono.getImage());
     }
     public Control_Page() {
@@ -69,7 +69,6 @@ public class Control_Page extends javax.swing.JFrame {
         btnEliminar.setVisible(false);
         btnLimpiar.setVisible(false);
         btnDescargar.setVisible(false);
-        btnHuella.setVisible(false);
 
     }
     private void tablaActualizarTrue(){
@@ -92,12 +91,11 @@ public class Control_Page extends javax.swing.JFrame {
         tableDatos.setVisible(true);
         btnDescargar.setVisible(true);
         btnLimpiar.setVisible(true);
-        btnHuella.setVisible(true);
     }
     public void mostrarDatosTabla(String tabla){
         String sql = "select * from "+ tabla;
         Statement st;
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
         System.out.println(sql);    
         DefaultTableModel model = new DefaultTableModel();
@@ -130,7 +128,7 @@ public class Control_Page extends javax.swing.JFrame {
      public void mostrarDatosTablaRegistros(String tabla){
         String sql = "select * from "+ tabla;
         Statement st;
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
         System.out.println(sql);    
         DefaultTableModel model = new DefaultTableModel();
@@ -157,7 +155,7 @@ public class Control_Page extends javax.swing.JFrame {
     }
     public void modificarDatos(){
         try{
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
         ps= dbAG.prepareStatement("UPDATE empleado SET nombre=?,apellido=?,sexo=?,cargo=?,area=? WHERE id=?");
         
@@ -166,7 +164,7 @@ public class Control_Page extends javax.swing.JFrame {
         ps.setString(3, sexoCombo.getSelectedItem().toString());
         ps.setString(4, txtCargo.getText().toUpperCase());
         ps.setString(5, txtArea.getText().toUpperCase());
-        ps.setString(6, txtID.getText());
+
         
         int res = ps.executeUpdate();
         if(res >0){
@@ -186,7 +184,7 @@ public class Control_Page extends javax.swing.JFrame {
     }
     public void eliminarDatos(){
         try{
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
         ps= dbAG.prepareStatement("DELETE FROM empleado WHERE id=?");
         
@@ -210,7 +208,7 @@ public class Control_Page extends javax.swing.JFrame {
     }
     public void actualizarDatosTabla(){
     try{
-        dbAG con = new dbAG();
+        conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
 
         ps= dbAG.prepareStatement("INSERT INTO empleado (nombre,apellido,sexo,cargo,area) VALUES (?,?,?,?,?)");
@@ -370,7 +368,6 @@ public class Control_Page extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnHuella = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAsistencia = new javax.swing.JMenu();
         menuReportAsisten = new javax.swing.JMenuItem();
@@ -481,8 +478,6 @@ public class Control_Page extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        btnHuella.setText("Huella");
-
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
 
         menuAsistencia.setText("Control de Asistencia");
@@ -560,8 +555,7 @@ public class Control_Page extends javax.swing.JFrame {
                                     .addGap(35, 35, 35)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnHuella))))
+                                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,7 +608,7 @@ public class Control_Page extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -625,9 +619,7 @@ public class Control_Page extends javax.swing.JFrame {
                             .addComponent(btnLimpiar))
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLabel)
-                            .addComponent(btnHuella))
+                        .addComponent(txtLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblcodigoQR, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))))
@@ -750,7 +742,6 @@ public class Control_Page extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnHuella;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegister;
     private javax.swing.JFileChooser jFileChooser1;

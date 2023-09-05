@@ -37,7 +37,7 @@ public class Login_Page extends javax.swing.JFrame {
     }
      //icono form
     public void iconImage(){
-        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/company.jpg");
+        ImageIcon icono = new ImageIcon("src/asistenciaapp/img/inTime2.png");
         this.setIconImage(icono.getImage());
     }
     
@@ -148,7 +148,7 @@ public class Login_Page extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 255));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asistenciaapp/img/company.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asistenciaapp/img/inTime.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,7 +162,7 @@ public class Login_Page extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(123, 123, 123)
+                .addGap(108, 108, 108)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -215,7 +215,7 @@ public class Login_Page extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
