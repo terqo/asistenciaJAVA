@@ -203,12 +203,12 @@ public class Huella_Page extends javax.swing.JFrame {
     try {
         conexionDB con = new conexionDB();
         Connection dbAG = con.Conectar();
-        ps = dbAG.prepareStatement("SELECT apellido FROM empleado WHERE id = ?");
+        ps = dbAG.prepareStatement("SELECT nombre FROM empleado WHERE id = ?");
         ps.setString(1, idEmpleado);
         rs = ps.executeQuery();
-        String apellidoEmpleado = "";
+        String nombreEmpleado = "";
         if (rs.next()) {
-            apellidoEmpleado = rs.getString("apellido");
+            nombreEmpleado = rs.getString("nombre");
         }
         // Obtener la fecha y hora actual
         LocalDate fechaActual = LocalDate.now();
@@ -218,14 +218,14 @@ public class Huella_Page extends javax.swing.JFrame {
         // Insertar los datos del nuevo registro en la tabla correspondiente
         PreparedStatement stmt = dbAG.prepareStatement("INSERT INTO registro (id, nombre, fecha) VALUES (?, ?, ?)");
         stmt.setString(1, idEmpleado);
-        stmt.setString(2, apellidoEmpleado);
+        stmt.setString(2, nombreEmpleado);
         stmt.setString(3, fechaActual.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + horaActual.format(DateTimeFormatter.ISO_LOCAL_TIME));
     
         int res = stmt.executeUpdate();
         
-        JOptionPane.showMessageDialog(null, "¡Hola "+ apellidoEmpleado + "! tu asistencia se ha guardado con éxito.\nVerifica que se haya registrado.", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE); 
+        JOptionPane.showMessageDialog(null, "¡Hola "+ nombreEmpleado + "! tu asistencia se ha guardado con éxito.\nVerifica que se haya registrado.", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE); 
         System.out.println("Nuevo registro insertado con éxito.");
-        nombreTxt.setText(apellidoEmpleado);
+        nombreTxt.setText(nombreEmpleado);
         idTxt.setText(idEmpleado);
 
     } catch (SQLException e) {
@@ -251,7 +251,7 @@ public class Huella_Page extends javax.swing.JFrame {
         System.out.println(sql);    
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("Apellido");
+        model.addColumn("Nombre");
         model.addColumn("Fecha/Hora");
         tableDatos.setModel(model);
         
@@ -599,7 +599,7 @@ public class Huella_Page extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "id", "name", "Fecha"
+                "id", "Nombre", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
