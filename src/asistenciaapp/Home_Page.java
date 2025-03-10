@@ -97,7 +97,7 @@ public class Home_Page extends javax.swing.JFrame{
 
         jLabel2.setBackground(new java.awt.Color(102, 255, 102));
         jLabel2.setFont(new java.awt.Font("Segoe Script", 0, 12)); // NOI18N
-        jLabel2.setText("terqo sound machine");
+        jLabel2.setText("beta1.3");
 
         jLabel3.setBackground(new java.awt.Color(102, 255, 102));
         jLabel3.setFont(new java.awt.Font("Cambria Math", 1, 12)); // NOI18N
