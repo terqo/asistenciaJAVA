@@ -164,6 +164,7 @@ public class Control_Page extends javax.swing.JFrame {
         ps.setString(3, sexoCombo.getSelectedItem().toString());
         ps.setString(4, txtCargo.getText().toUpperCase());
         ps.setString(5, txtArea.getText().toUpperCase());
+        ps.setString(6, txtID.getText().toUpperCase());
 
         
         int res = ps.executeUpdate();
