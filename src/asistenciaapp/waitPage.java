@@ -8,7 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 /**
  *
  * @author oscar
@@ -28,22 +29,42 @@ public class waitPage extends javax.swing.JFrame {
         this.setIconImage(icono.getImage());
     }
     
-     public void xampp(){
-         try {
-            // Ruta al ejecutable de XAMPP (reemplaza con la ruta correcta)
-            String xamppPath = "C:\\xampp\\xampp-control.exe";
+     public void xampp() {
+        try {
+            // Verificar si XAMPP ya está en ejecución
+            boolean isRunning = false;
 
-            // Crear un proceso que ejecuta el comando para abrir XAMPP
-            Process process = Runtime.getRuntime().exec(xamppPath);
+            // Obtener lista de procesos en ejecución
+            Process checkProcess = Runtime.getRuntime().exec("tasklist");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(checkProcess.getInputStream()));
+            String line;
 
-            // Esperar a que el proceso termine (opcional)
-            int exitCode = process.waitFor();
-            System.out.println("XAMPP se ha abierto con el código de salida: " + exitCode);
+            // Buscar procesos relacionados con XAMPP
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("xampp-control.exe")) {
+                    isRunning = true;
+                    break;
+                }
+            }
+            reader.close();
 
+            // Si XAMPP no está en ejecución, abrirlo
+            if (!isRunning) {
+                // Ruta al ejecutable de XAMPP
+                String xamppPath = "C:\\xampp\\xampp-control.exe";
+                // Crear un proceso que ejecuta el comando para abrir XAMPP
+                Process process = Runtime.getRuntime().exec(xamppPath);
+                Runtime.getRuntime().exec("C:\\xampp\\apache_start.bat");
+                Runtime.getRuntime().exec("C:\\xampp\\mysql_start.bat");
+                System.out.println("XAMPP se ha iniciado correctamente");
+                
+            } else {
+                System.out.println("XAMPP ya está en ejecución");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-     }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +86,7 @@ public class waitPage extends javax.swing.JFrame {
         jLabel2.setText("Cargando...");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("https://troyano.zip");
+        jLabel4.setText("https://ini.zip");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asistenciaapp/img/inTime.png"))); // NOI18N
@@ -80,12 +101,13 @@ public class waitPage extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel4)))
                 .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,45 +129,75 @@ public class waitPage extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+        @Override
+        public void run() {
+            try {
+                // Ruta base de XAMPP
+                String xamppPath = "C:\\xampp\\";
+
+                // Detener servicios de forma segura usando los scripts de XAMPP
+                Runtime.getRuntime().exec("taskkill /F /IM mysqld.exe"); 
+                System.out.println("MySQL detenido correctamente");
+
+                Runtime.getRuntime().exec("taskkill /F /IM httpd.exe");
+                System.out.println("Apache detenido correctamente");
+
+                // Finalmente cerramos el panel de control de XAMPP
+                Runtime.getRuntime().exec("taskkill /F /IM xampp-control.exe");
+                System.out.println("Panel de XAMPP cerrado correctamente");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Error al cerrar XAMPP: " + e.getMessage());
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    });
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(waitPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    //</editor-fold>
+    
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-               waitPage waitPage = new waitPage();
-                waitPage.setVisible(true);
-                int delay= (5000);
-                Timer timer = new Timer(delay, new ActionListener(){
-                 public void actionPerformed(ActionEvent e) {
-                waitPage.dispose();// Cerrar el JFrame actual
+                waitPage waitPage = new waitPage();
+                // Verificar y abrir XAMPP
+                waitPage.xampp();
 
-                // Abrir otro JFrame
-                new Home_Page().setVisible(true);
-                }
+                // Mostrar la página de espera
                 
+                waitPage.setVisible(true);
+
+                int delay = 5000;
+                Timer timer = new Timer(delay, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        waitPage.dispose(); // Cerrar el JFrame actual
+                        // Abrir otro JFrame
+                        new Home_Page().setVisible(true);
+                    }
                 });
-                 // Iniciar el temporizador
+
+                // Iniciar el temporizador
                 timer.setRepeats(false); // Para que se ejecute solo una vez
                 timer.start();
             }
