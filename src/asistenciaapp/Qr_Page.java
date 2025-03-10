@@ -211,92 +211,97 @@ public class Qr_Page extends javax.swing.JFrame {
         }
     }
 }
-    private void initWebcam() {
-        
+   private void initWebcam() {
         webcam = Webcam.getDefault();
         if (webcam != null) {
             System.out.println("Webcam: " + webcam.getName());
+
+            panel = new WebcamPanel(webcam);
+            panel.setMirrored(false);
+            panel.setFPSDisplayed(true);
+
+            qrCode.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            qrCode.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
+
+            Thread t = new Thread(new Runnable() {
+                public void run() {
+                    do {
+                        try {
+                            // Obtener la imagen original
+                            BufferedImage image = webcam.getImage();
+                            LuminanceSource source = new BufferedImageLuminanceSource(image);
+                            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                            Result result = new MultiFormatReader().decode(bitmap);
+                            if (result.getText() != null) {
+                                // Verificar si ha pasado el tiempo de espera
+                                long currentTime = System.currentTimeMillis();
+                                if (currentTime - lastReadTime > READ_TIMEOUT) {
+
+                                    // Registrar la asistencia
+                                    webcam.close();
+                                    registrarDatosAsistencia(result.getText());
+                                    System.out.println(result.getText());
+                                    mostrarDatosTablaRegistros("registro");
+
+                                    // Restablecer el tiempo de última lectura
+                                    lastReadTime = currentTime;
+                                    //captura de imagen
+                                    JLabel label = new JLabel(new ImageIcon(image));
+                                    label.setPreferredSize(new Dimension(600, 400));
+                                    JOptionPane.showMessageDialog(null, label, "Imagen", JOptionPane.PLAIN_MESSAGE);
+
+                                    // Procesar y verificar archivo existente a el código QR
+                                    String codigoQR = result.getText() + "_" + contador;
+                                    File fotosDir = new File("fotos");
+                                    if (!fotosDir.exists()) {
+                                        fotosDir.mkdir();
+                                    }
+                                    File fotosFolder = new File("fotos"); // abrir la carpeta "fotos"
+                                    File[] files = fotosFolder.listFiles(); // obtener los archivos de la carpeta
+
+                                    for (File file : files) {
+                                        if (file.isFile() && file.getName().startsWith(codigoQR)) {
+                                            // Si el archivo es un archivo regular y el nombre del archivo comienza con el código QR,
+                                            // significa que el archivo coincide con el código QR que se está procesando
+                                            String nombreArchivo = file.getName(); // obtener el nombre del archivo
+                                            System.out.println("el archivo encontrado fue " + nombreArchivo);
+                                            // aquí puedes hacer lo que necesites con el nombre del archivo
+                                            break; // salir del ciclo
+                                        }
+                                    }// Agregar contador al texto del QR
+                                    File file = new File("fotos/" + codigoQR  + ".png");
+                                    try {
+                                        ImageIO.write(image, "png", file);
+                                        System.out.println("Imagen guardada en: " + file.getAbsolutePath());
+                                    } catch (IOException e) {
+                                        System.err.println("Error al guardar la imagen: " + e.getMessage());
+                                    } 
+
+                                    break;
+                                }
+                            }
+                        } catch (Exception e) {
+                        }
+                    } while (true);
+                }
+            });
+            t.start();
         } else {
             System.out.println("No webcam detected");
+
+            // Mostrar mensaje al usuario
+            JOptionPane.showMessageDialog(
+                null, 
+                "No se ha detectado ninguna cámara. Regresando a la página principal.", 
+                "Error de cámara", 
+                JOptionPane.ERROR_MESSAGE
+            );
+
+            // Redirigir al Home_Page
+            this.setVisible(false);
+            new Home_Page().setVisible(true);
         }
-
-        
-        panel = new WebcamPanel(webcam);
-        
-        panel.setMirrored(false);
-        panel.setFPSDisplayed(true);
-
-        qrCode.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        qrCode.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
-        
-        
-         
-        Thread t = new Thread(new Runnable() {
-            public void run() {
-                do {
-                    try {
-                        // Obtener la imagen original
-                        BufferedImage image = webcam.getImage();
-                        LuminanceSource source = new BufferedImageLuminanceSource(image);
-                        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                        Result result = new MultiFormatReader().decode(bitmap);
-                        if (result.getText() != null) {
-                            // Verificar si ha pasado el tiempo de espera
-                            long currentTime = System.currentTimeMillis();
-                            if (currentTime - lastReadTime > READ_TIMEOUT) {
-                                
-                                // Registrar la asistencia
-                                webcam.close();
-                                registrarDatosAsistencia(result.getText());
-                                System.out.println(result.getText());
-                                mostrarDatosTablaRegistros("registro");
-                                
-                                
-                                // Restablecer el tiempo de última lectura
-                                lastReadTime = currentTime;
-                                //captura de imagen
-                                JLabel label = new JLabel(new ImageIcon(image));
-                                label.setPreferredSize(new Dimension(600, 400));
-                                JOptionPane.showMessageDialog(null, label, "Imagen", JOptionPane.PLAIN_MESSAGE);
-                                
-                                // Procesar y verificar archivo existente a el código QR
-                                String codigoQR = result.getText() + "_" + contador;
-                                File fotosDir = new File("fotos");
-                                if (!fotosDir.exists()) {
-                                    fotosDir.mkdir();
-                                }
-                                File fotosFolder = new File("fotos"); // abrir la carpeta "fotos"
-                                File[] files = fotosFolder.listFiles(); // obtener los archivos de la carpeta
-
-                                for (File file : files) {
-                                    if (file.isFile() && file.getName().startsWith(codigoQR)) {
-                                        // Si el archivo es un archivo regular y el nombre del archivo comienza con el código QR,
-                                        // significa que el archivo coincide con el código QR que se está procesando
-                                        String nombreArchivo = file.getName(); // obtener el nombre del archivo
-                                        System.out.println("el archivo encontrado fue " + nombreArchivo);
-                                        // aquí puedes hacer lo que necesites con el nombre del archivo
-                                        break; // salir del ciclo
-                                    }
-                                }// Agregar contador al texto del QR
-                                File file = new File("fotos/" + codigoQR  + ".png");
-                                try {
-                                    ImageIO.write(image, "png", file);
-                                    System.out.println("Imagen guardada en: " + file.getAbsolutePath());
-                                } catch (IOException e) {
-                                    System.err.println("Error al guardar la imagen: " + e.getMessage());
-                                } 
-
-                                break;
-                    }
-                }
-
-                    } catch (Exception e) {
-                    }
-                } while (true);
-            }
-        });
-        t.start();
-    }  
+    } 
     public void mostrarDatosTablaRegistros(String tabla){
         String sql = "SELECT * FROM "+ tabla + " ORDER BY fecha DESC LIMIT 3";
         Statement st;
